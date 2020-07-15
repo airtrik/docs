@@ -6,6 +6,10 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>DocuAPI Example Site</title>
+    
+
+
+
 
 
 
@@ -31,7 +35,7 @@
 
     
 </head>
-<body class="index" data-languages="[ &#34;python&#34; ,  &#34;javascript&#34; ,  &#34;node&#34; ,  &#34;c&#34; ,  &#34;java&#34; ,  &#34;react&#34; ]">
+<body class="index" data-languages="[ &#34;python&#34; ,  &#34;javascript&#34; ,  &#34;js&#34; ,  &#34;c&#34; ,  &#34;java&#34; ,  &#34;react&#34; ]">
     <a href="#" id="nav-button">
         <span>
         NAV
@@ -48,7 +52,7 @@
             
             <a href="#" data-language-name="javascript">Javascript</a>
             
-            <a href="#" data-language-name="node">Node</a>
+            <a href="#" data-language-name="js">Node</a>
             
             <a href="#" data-language-name="c">C</a>
             
@@ -148,6 +152,37 @@ iot<span style="color:#f92672">.</span>subscribe(device)
 	msg <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter the message to send to &#34;</span><span style="color:#f92672">+</span>device)
 	iot<span style="color:#f92672">.</span>send(device, message)
 
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">
+<span style="color:#75715e">// create app in the panel to get the app key
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">AIRTRIK_connect</span>(<span style="color:#e6db74">&#34;__APP_KEY__&#34;</span>)
+
+<span style="color:#a6e22e">onConnect</span> <span style="color:#f92672">=</span> ()=&gt;{
+	<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Connected&#34;</span>)
+	<span style="color:#a6e22e">subscribe</span>(<span style="color:#e6db74">&#39;bulb&#39;</span>) <span style="color:#75715e">// device to subscribe
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;bulb&#39;</span>, <span style="color:#e6db74">&#39;Handshake&#39;</span>) <span style="color:#75715e">// `bulb` is the device `Handshake` is the initial message
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#a6e22e">onReceive</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">msg</span>, <span style="color:#a6e22e">deviceId</span>)=&gt;{
+	<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">msg</span>)
+	<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">deviceId</span>)
+}
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">airtrik</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;airtrik&#34;</span>)
+
+<span style="color:#75715e">// create app in the panel to get the app key
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">airtrik</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#e6db74">&#34;__APP_KEY__&#34;</span>)
+
+<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;connect&#39;</span>, ()=&gt;{
+	<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">subscribe</span>(<span style="color:#e6db74">&#34;bulb&#34;</span>) <span style="color:#75715e">// device to subscribe
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Connected&#34;</span>)
+	<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;bulb&#34;</span>, <span style="color:#e6db74">&#34;Handshake&#34;</span>) <span style="color:#75715e">// `bulb` is the device `Handshake` is the initial message
+</span><span style="color:#75715e"></span>})
+
+<span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;receive&#39;</span>, (<span style="color:#a6e22e">msg</span>, <span style="color:#a6e22e">deviceId</span>)=&gt;{
+	<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">msg</span>, <span style="color:#a6e22e">deviceId</span>)
+})
+
 </code></pre></div><blockquote>
 <p>Make sure to replace <code>__APP_KEY__</code> with your APP key.</p>
 </blockquote>
@@ -232,7 +267,7 @@ You must replace <code>__APP_KEY__</code> with your personal APP key.
                 
                 <a href="#" data-language-name="javascript">Javascript</a>
                 
-                <a href="#" data-language-name="node">Node</a>
+                <a href="#" data-language-name="js">Node</a>
                 
                 <a href="#" data-language-name="c">C</a>
                 
