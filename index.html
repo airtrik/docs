@@ -31,7 +31,7 @@
 
 
 
-<script src='/js/all.min.af482a17639ac52499e7e9f85314de520da5a075168d0c2410145640dea01b9a.js' integrity="sha256-r0gqF2OaxSSZ5&#43;n4UxTeUg2loHUWjQwkEBRWQN6gG5o="></script>
+<script src='/js/all.min.baa952bf8c0351dbc2ef89d3b43ce11f453afea6d0abdbb9a6bcecb55d8a90cf.js' integrity="sha256-uqlSv4wDUdvC74nTtDzhH0U6/qbQq9u5przstV2KkM8="></script>
 
     
 </head>
@@ -182,6 +182,38 @@ iot<span style="color:#f92672">.</span>subscribe(device)
 <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;receive&#39;</span>, (<span style="color:#a6e22e">msg</span>, <span style="color:#a6e22e">deviceId</span>)=&gt;{
 	<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">msg</span>, <span style="color:#a6e22e">deviceId</span>)
 })
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
+<span style="color:#f92672">import</span> com.airtrik.iot.Airtrik<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">// Connect to the app, put this code inside your Activity class
+</span><span style="color:#75715e"></span>Airtrik<span style="color:#f92672">.</span><span style="color:#a6e22e">connect</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;__APP_KEY__&#34;</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> Airtrik<span style="color:#f92672">.</span><span style="color:#a6e22e">Options</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onConnect</span><span style="color:#f92672">(</span>String appName<span style="color:#f92672">,</span> String<span style="color:#f92672">[]</span> devices<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+      <span style="color:#75715e">// Print app name
+</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>appName<span style="color:#f92672">);</span>
+
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> devices<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++){</span>
+            <span style="color:#75715e">// List all devices
+</span><span style="color:#75715e"></span>            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>devices<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onMessageReceive</span><span style="color:#f92672">(</span>String deviceId<span style="color:#f92672">,</span> String msg<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#75715e">// Print all incomming message
+</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>msg<span style="color:#f92672">+</span><span style="color:#e6db74">&#34; from &#34;</span><span style="color:#f92672">+</span>deviceId<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">onAppKeyError</span><span style="color:#f92672">(){</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;APP KEY NOT CORRECT&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">});</span>
+
+<span style="color:#75715e">// Sending message to device
+</span><span style="color:#75715e"></span>Airtrik<span style="color:#f92672">.</span><span style="color:#a6e22e">send</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;__DEVICE_ID__&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;__MESSAGE__&#34;</span><span style="color:#f92672">);</span>
+
 
 </code></pre></div><blockquote>
 <p>Make sure to replace <code>__APP_KEY__</code> with your APP key.</p>
